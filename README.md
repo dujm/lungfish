@@ -1,4 +1,4 @@
-# 
+#
 
 
 [![banner](https://raw.githubusercontent.com/oceanprotocol/art/master/github/repo-banner%402x.png)](https://oceanprotocol.com)
@@ -7,7 +7,7 @@
 
 > Deep learning for Health Care, powered by [Ocean](https://oceanprotocol.com).
 
-![fishy](https://upload.wikimedia.org/wikipedia/commons/8/86/Queensland_Lungfish_%28Neoceratodus_forsteri%29.jpg)
+
 
 ***Lungfish** are freshwater [rhipidistian](https://en.wikipedia.org/wiki/Rhipidistian) fish belonging to the [subclass](https://en.wikipedia.org/wiki/Subclass_(biology)) **Dipnoi**. Lungfish are best known for retaining characteristics primitive within the [Osteichthyes](https://en.wikipedia.org/wiki/Osteichthyes), including the ability to breathe air, and structures primitive within [Sarcopterygii](https://en.wikipedia.org/wiki/Sarcopterygii), including the presence of lobed fins with a well-developed internal skeleton.* -[Wikipedia](https://en.wikipedia.org/wiki/Lungfish)
 
@@ -22,9 +22,6 @@ TODO Change this to match the repo name and testing environments
 ## Table of Contents
 
 - [Features](#features)
-- [Prerequisites](#prerequisites)
-- [Quickstart](#quickstart)
-- [Environment variables](#environment-variables)
 - [Code style](#code-style)
 - [Testing](#testing)
 - [New Version](#new-version)
@@ -35,28 +32,16 @@ TODO Change this to match the repo name and testing environments
 ## Features
 
 TODO
-Elasticsearch driver to connect implementing OceanDB.
+
 
 ## Prerequisites
 
 TODO
-You should have running a elasticsearch instance.
 
 ## Quickstart
 
-...
-
-## Environment variables
-
 TODO
-When you want to instantiate an Oceandb plugin you can provide the next environment variables:
 
-- **$CONFIG_PATH** 
-- **$MODULE** 
-- **$DB_HOSTNAME** 
-- **$DB_PORT**
-
-...
 
 ## Code style
 
@@ -66,8 +51,7 @@ and [python-style-guide](https://github.com/oceanprotocol/dev-ocean/blob/master/
 
 ## Testing
 
-Automatic tests are setup via Travis, executing `tox`.
-Our test use pytest framework.
+
 
 ## New Version
 
