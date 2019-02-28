@@ -102,3 +102,9 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+*.draft.md
+*.dcm
+*.key
+*.h5
+*.local
