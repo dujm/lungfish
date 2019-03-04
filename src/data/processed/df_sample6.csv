@@ -1,0 +1,13 @@
+patientId,x,y,width,height,Target,class,boxes,x_2,y_2,x_center,y_center,area,path
+c7baa4b2-e22d-404f-ac74-d5793dff9a8e,,,,,0,No Lung Opacity / Not Normal,1,,,,,,/home/ubuntu/healthcare/pneumonia_lungfish/src/data/raw/stage_2_train_images/c7baa4b2-e22d-404f-ac74-d5793dff9a8e.dcm
+88b4addb-e92d-45a3-91f6-ed710e0d7443,,,,,0,Normal,1,,,,,,/home/ubuntu/healthcare/pneumonia_lungfish/src/data/raw/stage_2_train_images/88b4addb-e92d-45a3-91f6-ed710e0d7443.dcm
+eb211810-c51d-42c7-913b-d327c8ca4dd7,209.0,525.0,184.0,177.0,1,Lung Opacity,1,393.0,702.0,301.0,613.5,32568.0,/home/ubuntu/healthcare/pneumonia_lungfish/src/data/raw/stage_2_train_images/eb211810-c51d-42c7-913b-d327c8ca4dd7.dcm
+fcd159f4-21d3-4169-a94b-95a2b5ccddcb,178.0,435.0,232.0,310.0,1,Lung Opacity,2,410.0,745.0,294.0,590.0,71920.0,/home/ubuntu/healthcare/pneumonia_lungfish/src/data/raw/stage_2_train_images/fcd159f4-21d3-4169-a94b-95a2b5ccddcb.dcm
+fcd159f4-21d3-4169-a94b-95a2b5ccddcb,659.0,409.0,230.0,307.0,1,Lung Opacity,2,889.0,716.0,774.0,562.5,70610.0,/home/ubuntu/healthcare/pneumonia_lungfish/src/data/raw/stage_2_train_images/fcd159f4-21d3-4169-a94b-95a2b5ccddcb.dcm
+e3884258-8083-4b8e-b952-9adc91a7f0f3,148.0,576.0,179.0,114.0,1,Lung Opacity,3,327.0,690.0,237.5,633.0,20406.0,/home/ubuntu/healthcare/pneumonia_lungfish/src/data/raw/stage_2_train_images/e3884258-8083-4b8e-b952-9adc91a7f0f3.dcm
+e3884258-8083-4b8e-b952-9adc91a7f0f3,620.0,441.0,195.0,327.0,1,Lung Opacity,3,815.0,768.0,717.5,604.5,63765.0,/home/ubuntu/healthcare/pneumonia_lungfish/src/data/raw/stage_2_train_images/e3884258-8083-4b8e-b952-9adc91a7f0f3.dcm
+e3884258-8083-4b8e-b952-9adc91a7f0f3,262.0,273.0,143.0,195.0,1,Lung Opacity,3,405.0,468.0,333.5,370.5,27885.0,/home/ubuntu/healthcare/pneumonia_lungfish/src/data/raw/stage_2_train_images/e3884258-8083-4b8e-b952-9adc91a7f0f3.dcm
+349f10b4-dc3e-4f3f-b2e4-a5b81448ce87,365.0,192.0,115.0,173.0,1,Lung Opacity,4,480.0,365.0,422.5,278.5,19895.0,/home/ubuntu/healthcare/pneumonia_lungfish/src/data/raw/stage_2_train_images/349f10b4-dc3e-4f3f-b2e4-a5b81448ce87.dcm
+349f10b4-dc3e-4f3f-b2e4-a5b81448ce87,614.0,264.0,128.0,171.0,1,Lung Opacity,4,742.0,435.0,678.0,349.5,21888.0,/home/ubuntu/healthcare/pneumonia_lungfish/src/data/raw/stage_2_train_images/349f10b4-dc3e-4f3f-b2e4-a5b81448ce87.dcm
+349f10b4-dc3e-4f3f-b2e4-a5b81448ce87,594.0,465.0,259.0,272.0,1,Lung Opacity,4,853.0,737.0,723.5,601.0,70448.0,/home/ubuntu/healthcare/pneumonia_lungfish/src/data/raw/stage_2_train_images/349f10b4-dc3e-4f3f-b2e4-a5b81448ce87.dcm
+349f10b4-dc3e-4f3f-b2e4-a5b81448ce87,204.0,385.0,219.0,222.0,1,Lung Opacity,4,423.0,607.0,313.5,496.0,48618.0,/home/ubuntu/healthcare/pneumonia_lungfish/src/data/raw/stage_2_train_images/349f10b4-dc3e-4f3f-b2e4-a5b81448ce87.dcm
