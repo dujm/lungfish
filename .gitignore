@@ -111,3 +111,4 @@ venv.bak/
 tree.txt
 *Mask_RCNN
 *events.out
+*.local.backup
