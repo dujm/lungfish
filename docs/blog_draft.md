@@ -8,7 +8,7 @@ Pneumonia Lungfish
 
 In this post we’ll use Mask R-CNN to build a model that takes chest X-Ray images as input and outputs a bounding box and a mask that segments lung opacities in the image.
 
-We’ll use the train and dev datasets provided by the Kaggle RSNA Challenge competition as well as the great Mask R-CNN implementation library by [Matterport](Link to code in github: https://github.com/gabrielgarza/Mask_RCNN).
+We’ll use the train and dev datasets provided by the Kaggle RSNA Challenge competition as well as the great Mask R-CNN implementation library by [Matterport](https://github.com/matterport/Mask_RCNN).
 
 
 One of the most exciting applications of deep learning is the ability for machines to understand images. Fei-Fei Li has referred to this as giving machines the “ability to see”.
