@@ -23,7 +23,7 @@ One of the most exciting applications of deep learning is the ability for machin
 ## I. Problems in medical imaging detection
 * Domain specific
 
-* Gap in knowledge and service
+* Gaps in knowledge and service
 
 * Data sharing
 
@@ -73,21 +73,21 @@ Instead of replicating the entire algorithm based on the research paper, we’ll
   * Initial run using coco weights  
   ```  
   python3 ./pneumonia.py train --dataset=./datasets --weights=coco
-```
-  * Continue training  
-```  
-python3 ./pneumonia.py train --dataset=./datasets --weights=last
-```
+  ```
+  * Continue training   
+  ```  
+  python3 ./pneumonia.py train --dataset=./datasets --weights=last
+  ```
 
   * Explain:   train.sh -> loads latest weights, runs the train command python3 ./pneumonia.py train --dataset=./datasets --weights=last
 
 
 * Tune our model to get good results.
-  * Here I add a file, need to add more codes
+  * Here I add a file, need to add more codes   
 
     ```
   DetectorConfig.py in src/config
-  ```
+    ```
   * **Parameters to turn**
 
     * RPN_ANCHOR_SCALES = (64, 96, 128, 256, 512)  
@@ -102,13 +102,14 @@ python3 ./pneumonia.py train --dataset=./datasets --weights=last
 
 ## IV. Inference
 * *Here I need to write a predict.sh*  
+
   ```
   bash predict.sh
-  ```
+    ```
 * the predict.sh will use a file
-```
+  ```
   src/config/InferenceConfig.py
-```
+  ```
 
 *  need to complete the codes
 * format of my result File
