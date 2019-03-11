@@ -103,13 +103,25 @@ venv.bak/
 # mypy
 .mypy_cache/
 
-*.draft.md
+
+# bigfiles
 *.dcm
-*.key
 *.h5
+*models_working
 *.local
+*.local.backup
 tree.txt
 *Mask_RCNN
 *events.out
-*.local.backup
+*.out.tfevents
 *.zip
+*.npz
+
+#files with copy right
+*.copyright.pdf
+
+#draft
+*.draft.md
+*.key
+*submission
+*ocean_assets_app
