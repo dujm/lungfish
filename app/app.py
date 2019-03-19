@@ -1,14 +1,6 @@
 
-import flask
-import dash
+import os, glob, numpy as np, pandas as pd
 
-import dateutil.parser
-
-import os, shutil, warnings, random, glob, pylab, numpy as np, pandas as pd, time, datetime
-from pathlib import Path
-
-
-from tqdm import tqdm
 from functools import partial
 from collections import defaultdict
 # flask
@@ -25,6 +17,8 @@ from plotly.offline import download_plotlyjs, init_notebook_mode,  iplot, plot
 import plotly
 
 # dash
+
+import flask
 import dash
 import dash_core_components as dcc
 from dash.dependencies import Input, Output,State
@@ -33,7 +27,7 @@ import dash_html_components as html
 import dash_table
 # datatable filtering
 import json
-warnings.filterwarnings('ignore')
+
 
 
 server = flask.Flask(__name__)

@@ -1,10 +1,21 @@
-plotly==2.4.1
-pandas==0.19.2
+plotly==3.6.1
+numpy==1.16.2
+pandas==0.23.4
 pandas-datareader==0.3.0.post0
-dash==0.35.1
-dash-html-components==0.13.4
-dash-core-components==0.42.1
+
 gunicorn==19.7.1
 flask>=0.12.3
-flask_cors
-dash-table-experiments
+flask_cors==3.0.6
+
+# newly added 20190320
+dash==0.37.0
+dash-core-components==0.43.1
+dash-html-components==0.13.5
+dash-renderer==0.18.0
+dash-table==3.4.0
+dash-table-experiments==0.6.0
+
+pydicom==1.2.2
+matplotlib ==2.2.3
+PIL==5.2.0
+json==2.0.9
