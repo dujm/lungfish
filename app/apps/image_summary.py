@@ -83,7 +83,7 @@ layout = [
     # top controls
     html.Div(
         [
-        html.H1("Summary of Image Assets"),
+        html.H2("Summary of Registered Medical Images"),
         dcc.Dropdown(
             id='app-1-dropdown',
             options=[

@@ -8,7 +8,6 @@
 > Deep learning for Health Care, powered by [Ocean](https://oceanprotocol.com).
 
 
-
 ***Lungfish** are freshwater [rhipidistian](https://en.wikipedia.org/wiki/Rhipidistian) fish belonging to the [subclass](https://en.wikipedia.org/wiki/Subclass_(biology)) **Dipnoi**. Lungfish are best known for retaining characteristics primitive within the [Osteichthyes](https://en.wikipedia.org/wiki/Osteichthyes), including the ability to breathe air, and structures primitive within [Sarcopterygii](https://en.wikipedia.org/wiki/Sarcopterygii), including the presence of lobed fins with a well-developed internal skeleton.* -[Wikipedia](https://en.wikipedia.org/wiki/Lungfish)
 
 TODO Change this to match the repo name and testing environments
@@ -22,25 +21,26 @@ TODO Change this to match the repo name and testing environments
 ## Table of Contents
 
 - [Features](#features)
+- [Prerequisites](#prerequisites)
 - [Code style](#code-style)
-- [Testing](#testing)
 - [New Version](#new-version)
 - [License](#license)
 
 ------
 
 ## Features
+This project is about a healthcare use case, X-Ray Vision, powered by decentralized data science using Ocean Protocol.  
 
-TODO
+The major content in this project is
+
+  * Medical Image visualisation
+
+  * Lung Opacity Detection using Deep Learning
 
 
 ## Prerequisites
 
-TODO
-
-## Quickstart
-
-TODO
+Python 3
 
 
 ## Code style
@@ -48,9 +48,6 @@ TODO
 The information about code style in python is documented in this two links [python-developer-guide](https://github.com/oceanprotocol/dev-ocean/blob/master/doc/development/python-developer-guide.md)
 and [python-style-guide](https://github.com/oceanprotocol/dev-ocean/blob/master/doc/development/python-style-guide.md).
 ​    
-
-## Testing
-
 
 
 ## New Version

@@ -30,28 +30,40 @@ import json
 
 #import directories from app.py
 # import functions from app.py
-from app import app, server, pl_bone, colors,indicator,  df_to_table, histogram_equalization, get_pl_image, DICOM_heatmap, read_dcm_meta
+from app import app, server, pl_bone, colors,indicator,  df_to_table, histogram_equalization, get_pl_image, DICOM_heatmap
 
 
 
 #####################################################################
-#colors = {"background": "#F3F6FA", "background_div": "white"}
+# A function to read dcm meta data into a dataframe
+def read_dcm_meta(image_directory,save_csv_dir):
+    image_fps = []
+    for (dirpath, dirnames, filenames) in os.walk(image_directory):
+        #print(filenames)
+        image_fps += [os.path.join(dirpath, file) for file in filenames if file.endswith('.dcm')]
+    print(len(image_fps),'.dcm files were found in',image_directory)
 
+    dcms = [pydicom.read_file(x, stop_before_pixels=True) for x in image_fps]
+
+    meta, tag_to_key = zip(*[parse_dcm_metadata(x) for x in dcms])
+
+    df_dcm = pd.DataFrame.from_records(data=meta)
+    print(df_dcm.head(1))
+    filename= 'df_dcm_' + str(len(image_fps)) + 'dash_sample.csv'
+    df_dcm.to_csv(os.path.join(save_csv_dir,filename),index=False)
+    return df_dcm
 
 #####################################################################
 # 2. directories
 # Sample image data
 sample_image=('./data/sample_image/')
-sample_train = ('./data/sample_image/sample_train/')
-sample_validate = ('./data/sample_image/sample_validate/')
-sample_test= ('./data/image_data/sample_image/sample_test/')
 
 # Sample meta data
 sample_meta=('./data/sample_meta/')
 #####################################################################
 # 1.1 Read csv data
-df =pd.read_csv('./data/sample_meta/df_dcm_merge_box_bbcounts_app1000samples_cleaned.csv')
-df['Number'] = range(1, len(df) + 1)
+df1 =pd.read_csv('./data/sample_meta/df_dcm_merge_box_bbcounts_app1000samples_cleaned.csv')
+df1['Number'] = range(1, len(df1) + 1)
 
 #####################################################################
 
@@ -61,7 +73,7 @@ layout = [
     # top controls
     html.Div(
         [
-        html.H1("Medical Image Assets"),
+        html.H2("Visualization of Registered Medical Images"),
         dcc.Dropdown(
             id='app-1-dropdown',
             options=[
@@ -108,8 +120,8 @@ layout = [
             dt.DataTable(
             id='dt_interactive',
             # rows
-            rows=df.to_dict('records'),# initialize the rows
-            columns=df.columns,
+            rows=df1.to_dict('records'),# initialize the rows
+            columns=df1.columns,
             row_selectable=True,
             filterable=True,
             sortable=True,
@@ -156,7 +168,7 @@ def update_selected_row_indices(clickData, selected_row_indices):
     [Input('dt_interactive', 'rows'),
      Input('dt_interactive', 'selected_row_indices')])
 def update_figure(rows, selected_row_indices):
-    dff = pd.DataFrame(rows)
+    #df1 = pd.DataFrame(rows)
     selected_rows=[rows[i] for i in selected_row_indices]
     #selected_rows=selected_row_indices[-1]
     print(selected_rows)

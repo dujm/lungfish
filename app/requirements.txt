@@ -19,3 +19,6 @@ pydicom==1.2.2
 matplotlib ==2.2.3
 PIL==5.2.0
 json==2.0.9
+
+#boto3
+#flask_caching

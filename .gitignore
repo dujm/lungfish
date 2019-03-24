@@ -123,5 +123,6 @@ tree.txt
 #draft
 *.draft.md
 *.key
+.xlsx
 *submission
 *ocean_assets_app

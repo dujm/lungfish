@@ -16,20 +16,16 @@ app.layout = html.Div(
     [
         # header
         html.Div([
-            html.H1("X-Ray Vision", className='app-title'),
-            html.Img(
-                        src='https://github.com/oceanprotocol/art/blob/master/logo/logo.png?raw=true',
-                        className='one columns',
-                        style={
-                        'height': '200',
-                        'width': '200',
-                        'float': 'right',
-                        'position': 'relative',
-                        'marginBottom': 50, 'marginTop': 80},
-                         ),
+            html.Div(
+                html.Img(src='https://raw.githubusercontent.com/oceanprotocol/art/master/logo/logo-white.png',height="90%")
+                ,style={"float":"right","height":"100%"}),
+            html.H3("X-Ray Vision", className='app-title'),
+
+
             ],
             className="row header"
-            ),
+),
+
 
         # tabs
         html.Div([
@@ -37,9 +33,10 @@ app.layout = html.Div(
                 id="tabs",
                 style={"height":"60","verticalAlign":"middle", 'fontSize': 22},
                 children=[
-                    dcc.Tab(label="Image Visulization", value="image_assets_tab"),
-                    dcc.Tab(label="Image Summary", value="image_summary_tab"),
-                    
+                    dcc.Tab(label="Image Asset Visualisation", value="image_assets_tab"),
+                    dcc.Tab(label="Image Asset Summary", value="image_summary_tab"),
+                    dcc.Tab(label="Local Image Processing", value="image_upload_tab")
+
                 ],
                 value="image_assets_tab",
             )

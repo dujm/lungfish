@@ -15,3 +15,7 @@ tqdm
 pydicom
 Pillow
 pandas
+#functools
+#collections
+
+dash-table-experiments
