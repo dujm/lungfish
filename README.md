@@ -1,41 +1,34 @@
-#
+
 
 
 [![banner](https://raw.githubusercontent.com/oceanprotocol/art/master/github/repo-banner%402x.png)](https://oceanprotocol.com)
 
-# lungfish
+### X-Ray Vision Medical Diagnostics Workflow
 
-> Deep learning for Health Care, powered by [Ocean](https://oceanprotocol.com).
-
-
-***Lungfish** are freshwater [rhipidistian](https://en.wikipedia.org/wiki/Rhipidistian) fish belonging to the [subclass](https://en.wikipedia.org/wiki/Subclass_(biology)) **Dipnoi**. Lungfish are best known for retaining characteristics primitive within the [Osteichthyes](https://en.wikipedia.org/wiki/Osteichthyes), including the ability to breathe air, and structures primitive within [Sarcopterygii](https://en.wikipedia.org/wiki/Sarcopterygii), including the presence of lobed fins with a well-developed internal skeleton.* -[Wikipedia](https://en.wikipedia.org/wiki/Lungfish)
-
-TODO Change this to match the repo name and testing environments
-[![Travis (.com)](https://img.shields.io/travis/com/oceanprotocol/oceandb-elasticsearch-driver.svg)](https://travis-ci.com/oceanprotocol/oceandb-elasticsearch-driver)
-[![Codacy coverage](https://img.shields.io/codacy/coverage/de067a9402c64b989c76b27cfc74fefe.svg)](https://app.codacy.com/project/ocean-protocol/oceandb-elasticsearch-driver/dashboard)
-[![PyPI](https://img.shields.io/pypi/v/oceandb-elasticsearch-driver.svg)](https://pypi.org/project/oceandb-elasticsearch-driver/)
-[![GitHub contributors](https://img.shields.io/github/contributors/oceanprotocol/oceandb-elasticsearch-driver.svg)](https://github.com/oceanprotocol/oceandb-elasticsearch-driver/graphs/contributors)
+> A healthcare use case, powered by [Ocean](https://oceanprotocol.com).
 
 ------
 
 ## Table of Contents
-
+- [Blog](#blog)
 - [Features](#features)
 - [Prerequisites](#prerequisites)
 - [Code style](#code-style)
 - [New Version](#new-version)
 - [License](#license)
-
+- [Files](#files)
 ------
-
+## Blog
+[Blog Post on Medium](https://blog.oceanprotocol.com/)
 ## Features
-This project is about a healthcare use case, X-Ray Vision, powered by decentralized data science using Ocean Protocol.  
 
-The major content in this project is
+The major modules in X-Ray Vision are
 
-  * Medical Image visualisation
+  * Medical Image visualisation App (Alpha Version)
+    * http://18.185.53.230:8050  
 
   * Lung Opacity Detection using Deep Learning
+    * Check [Jupyter Notebooks](https://github.com/oceanprotocol/lungfish/tree/develop/ocean_assets/notebook)
 
 
 ## Prerequisites
@@ -72,3 +65,21 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 ```
+##  Files
+
+    ├── requirements.txt : packages
+    ├── app: I. Medical Image Visulization (Web-application)
+    ├── ocean_assets: II. Lung Opacity Detection using Deep Learning
+    │   ├── image_data
+    │   ├── meta_data
+    │   ├── models
+    │   ├── notebook
+    │   ├── utils: functions
+    │   └── visualization
+    ├── references
+    ├── reports: More data Visulization
+    ├── src: Source files
+    │   ├── Mask_RCNN: Mask_RCNN library
+    │   ├── __init__.py
+    │   ├── config: functions
+    └── └── data: raw data and processed data (image data is not uploaded to GitHub)
