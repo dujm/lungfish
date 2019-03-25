@@ -10,7 +10,7 @@ BUCKET_NAME = 'bucketeer-dash-image-processing'
 # [filename, image_signature, action_stack]
 STORAGE_PLACEHOLDER = json.dumps({
     'filename': None,
-    'image_signature': None, 
+    'image_signature': None,
     'action_stack': []
 })
 

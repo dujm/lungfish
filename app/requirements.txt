@@ -7,18 +7,9 @@ gunicorn==19.7.1
 flask>=0.12.3
 flask_cors==3.0.6
 
-# newly added 20190320
 dash==0.37.0
-dash-core-components==0.43.1
-dash-html-components==0.13.5
 dash-renderer==0.18.0
 dash-table==3.4.0
 dash-table-experiments==0.6.0
-
 pydicom==1.2.2
-matplotlib ==2.2.3
-PIL==5.2.0
-json==2.0.9
-
-#boto3
-#flask_caching
+Pillow==5.2.0

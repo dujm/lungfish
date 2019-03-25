@@ -9,7 +9,6 @@ import plotly.plotly as py
 from plotly import graph_objs as go
 import math
 
-
 from apps import image_assets,image_summary, image_upload
 from app import app, server,indicator
 app.layout = html.Div(
@@ -80,5 +79,6 @@ def render_content(tab):
     else:
         return image_assets.layout
 
+
 if __name__ == "__main__":
-    app.run_server(debug=True)
+    app.run_server(debug=True, host='0.0.0.0')

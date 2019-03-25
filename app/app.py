@@ -7,8 +7,7 @@ from collections import defaultdict
 from flask import Flask
 from flask_cors import CORS
 # packages for visualization
-import pydicom, matplotlib.pyplot as plt
-from matplotlib import patches
+import pydicom
 from PIL import Image
 import plotly.graph_objs as go
 import plotly.plotly as py
