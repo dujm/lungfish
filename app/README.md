@@ -44,9 +44,9 @@ Go to http://18.185.53.230:8050
 
 <br>
 
-### IV. Blog
+### IV. Blog  
 [Blog Post on Medium](https://blog.oceanprotocol.com/)
 
 <br>
-### V. Reference
+### V. Reference  
 [dash-salesforce-crm](https://github.com/plotly/dash-salesforce-crm)
