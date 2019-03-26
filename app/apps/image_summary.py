@@ -1,18 +1,12 @@
-import os, glob, numpy as np, pandas as pd
+import os, glob, pandas as pd
 
-from functools import partial
-from collections import defaultdict
-# flask
-from flask import Flask
-from flask_cors import CORS
-# packages for visualization
-import pydicom
+
 
 from PIL import Image
 import plotly.graph_objs as go
 import plotly.plotly as py
 import plotly.tools as tls
-from plotly.offline import download_plotlyjs, init_notebook_mode,  iplot, plot
+
 import plotly
 
 # dash
@@ -24,10 +18,8 @@ from dash.dependencies import Input, Output,State
 import dash_table_experiments as dt
 import dash_html_components as html
 import dash_table
-# datatable filtering
-import json
 
-from app import app, server, pl_bone, colors,indicator,  df_to_table, histogram_equalization, get_pl_image, DICOM_heatmap, read_dcm_meta
+from app import app, server, colors,indicator
 
 #####################################################################
 # 2. directories
@@ -138,11 +130,12 @@ layout = [
                         id='bar-graph_total',
                         figure={
                         'data': [
-                            {'x': df_count_gender['PatientSex'], 'y': df_count_gender['total'], 'type': 'bar', 'name': 'Sum','text':df_opacity_gender['total'],
+                            {'x': df_count_gender['PatientSex'], 'y': df_count_gender['total'], 'type': 'bar', 'name': 'Sum','text':df_count_gender['total'],
                             'textposition':'auto',
                             'marker':dict(color='rgb(189,189,189)')},
                             ],
                         'layout': {
+
                             'title': 'Number of samples'
                             }
                                }
@@ -211,7 +204,7 @@ html.Div(
                     id='bar-graph_total4',
                     figure={
                     'data': [
-                        {'x': df_count_ViewPosition['ViewPosition'], 'y': df_count_ViewPosition['total'], 'type': 'bar', 'name': 'Sum','text':df_opacity_ViewPosition['total'],
+                        {'x': df_count_ViewPosition['ViewPosition'], 'y': df_count_ViewPosition['total'], 'type': 'bar', 'name': 'Sum','text':df_count_ViewPosition['total'],
                         'textposition':'auto',
                         'marker':dict(color='rgb(189,189,189)')},
                         ],

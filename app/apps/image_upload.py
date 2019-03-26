@@ -12,7 +12,7 @@ from PIL import Image
 import plotly.graph_objs as go
 import plotly.plotly as py
 import plotly.tools as tls
-from plotly.offline import download_plotlyjs, init_notebook_mode,  iplot, plot
+
 import plotly
 
 # dash
