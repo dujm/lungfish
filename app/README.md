@@ -2,18 +2,18 @@
 ------
 ## X-Ray Vision App for Medical Image Visualization
 
-#### 1. As a Online app for medical image visualization
-  * Go to http://18.185.53.230:8050
+#### 1. An online app for medical image visualization
+  * App URL http://18.185.53.230:8050
   * Tab 1: Visualization of Registered Medical Images
     * Check metadata of DICOM files
     * Visualization of DICOM files  
 
   * Tab 2: Summary Graphs of Registered Medical Images
-  * Note: a Pneumonia sample dataset is used in the demo (1000 DICOM files)
+  * Note: a pneumonia sample dataset is used in the demo (1000 DICOM files)
 
 <br>
 
-#### 2. As a Local App for medical image visualization
+#### 2. A local app for medical image visualization
   * Run the app locally
 ```
   # 1) Open your terminal and clone the repository  
@@ -34,7 +34,7 @@
 ```
   <br>
 
-### III. Built with
+### 3. Built with
   * Dash - Main server and interactive components
   * Plotly Python - Used to create the interactive plots
 
@@ -42,5 +42,5 @@
 
 <br>
 
-### IV. Reference  
+### 4. Reference  
 [dash-salesforce-crm](https://github.com/plotly/dash-salesforce-crm)
