@@ -2,37 +2,36 @@
 ------
 ## X-Ray Vision Web Application
 ### I. The currently supported functions
-Go to http://18.185.53.230:8050
 
-#### 1. Visualization of Registered Medical Images
-  * Check metadata of DICOM files
-  * Visualization of DICOM files  
 
-#### 2. Summary graphs of Registered Medical Images
-##### For demo: A Pneumonia sample dataset is used (1000 DICOM files)
+#### 1. Online app
+  * Go to http://18.185.53.230:8050
+  * Visualization of Registered Medical Images
+    * Check metadata of DICOM files
+    * Visualization of DICOM files  
+
+  * Summary Graphs of Registered Medical Images
+  * Note: a Pneumonia sample dataset is used in the demo (1000 DICOM files)
 
 <br>
 
-###  II. How to run the app locally for sensitive data?
-#### 1. Open your terminal and clone the repository  
-
+#### 2. Local Medical Image Visualization
+  * 1) Preparation
 ```
-  git clone https://github.com/oceanprotocol/lungfish.git
-```  
-#### 2. Copy your DICOM (.dcm) files to 'lungfish/app/data/local_image/'
-
-#### 3. Run the below commands in your terminal
-
-```    
-  cd lungfish/app
-  pip install -r requirements.txt
-  python index.py
+  # Open your terminal and clone the repository  
+    git clone https://github.com/oceanprotocol/lungfish.git
+  # Copy your DICOM (.dcm) files to 'localpathto/lungfish/app/  data/local_image/'
+  # Run the app in your terminal
+    cd lungfish/app
+    pip install -r requirements.txt
+    python index.py
 ```
 
-#### 4. Go to http://127.0.0.1:8050/ in your browser
-#### 5. Click the tab 'Local Image Processing'
-  * The metadata of all your local dcm files are automatically summarized in the table
-  * Click a row and visualize a DICOM file
+  * 2) Visualization
+   * Go to http://127.0.0.1:8050/ in your browser
+   * Click the tab 'Local Image Processing'
+   * The metadata of all your local dcm files are automatically summarized in the table
+   * Click a row and visualize a DICOM file
 
   <br>
 
@@ -44,10 +43,5 @@ Go to http://18.185.53.230:8050
 
 <br>
 
-### IV. Blog  
-[Blog Post in English](https://blog.oceanprotocol.com/)
-[Blog Post in simplified Chinese](https://medium.com/ocean-protocol-international/x-ray-vision-%E6%99%BA%E6%85%A7%E5%8C%BB%E7%96%97%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B-bb75ad5b873a)
-<br>
-
-### V. Reference  
+### IV. Reference  
 [dash-salesforce-crm](https://github.com/plotly/dash-salesforce-crm)
