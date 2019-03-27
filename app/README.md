@@ -1,10 +1,10 @@
 [![banner](https://raw.githubusercontent.com/oceanprotocol/art/master/github/repo-banner%402x.png)](https://oceanprotocol.com)
 ------
 ## X-Ray Vision Web Application
-### I.The currently supported functions
+### I. The currently supported functions
 Go to http://18.185.53.230:8050
 
-#### 1.Visualisation of Registered Medical Images
+#### 1. Visualization of Registered Medical Images
   * Check metadata of DICOM files
   * Visualization of DICOM files  
 
@@ -31,12 +31,12 @@ Go to http://18.185.53.230:8050
 
 #### 4. Go to http://127.0.0.1:8050/ in your browser
 #### 5. Click the tab 'Local Image Processing'
-  * The meta data of all your local dcm files are automatically summarized in the table
+  * The metadata of all your local dcm files are automatically summarized in the table
   * Click a row and visualize a DICOM file
 
   <br>
 
-### III. Built With
+### III. Built with
   * Dash - Main server and interactive components
   * Plotly Python - Used to create the interactive plots
 
@@ -45,8 +45,8 @@ Go to http://18.185.53.230:8050
 <br>
 
 ### IV. Blog  
-[Blog Post on Medium](https://blog.oceanprotocol.com/)
-
+[Blog Post in English](https://blog.oceanprotocol.com/)
+[Blog Post in simplified Chinese](https://medium.com/ocean-protocol-international/x-ray-vision-%E6%99%BA%E6%85%A7%E5%8C%BB%E7%96%97%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B-bb75ad5b873a)
 <br>
 
 ### V. Reference  

@@ -129,7 +129,7 @@ layout = [
             editable =True
             ),
             html.H2(''),
-            html.H2('Image Visulization of DICOM Files'),
+            html.H2('Image Visualization of DICOM Files'),
             html.Div(id='selected-indexes',style={'margin-top': 50,'marginBottom': 10}),
             dcc.Graph(id='dt_graph_local')
         ]

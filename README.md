@@ -19,12 +19,13 @@
 - [License](#license)
 ------
 ## Blog
-[Blog Post on Medium](https://blog.oceanprotocol.com/)
+[Blog Post in English](https://blog.oceanprotocol.com/)
+[Blog Post in simplified Chinese](https://medium.com/ocean-protocol-international/x-ray-vision-%E6%99%BA%E6%85%A7%E5%8C%BB%E7%96%97%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B-bb75ad5b873a)
 
 ## Features
 The major modules in X-Ray Vision are
 
-  * Medical Image visualisation App (Alpha Version)
+  * Medical Image visualization App (Alpha Version)
     * http://18.185.53.230:8050  
 
   * Lung Opacity Detection using Deep Learning
@@ -32,16 +33,16 @@ The major modules in X-Ray Vision are
 
 ##  Files
     ├── requirements.txt : packages
-    ├── app: I. Medical Image Visulization (Web-application)
+    ├── app: I. Medical Image Visualization (Web-application)
     ├── ocean_assets: II. Lung Opacity Detection using Deep Learning
     │   ├── image_data
     │   ├── meta_data
     │   ├── models
     │   ├── notebook
-    │   ├── utils: functions
+    │   ├── utils
     │   └── visualization
     ├── references
-    ├── reports: More data Visulization
+    ├── reports: More data Visualization
     ├── src: Source files
     │   ├── Mask_RCNN: Mask_RCNN library
     │   ├── __init__.py
