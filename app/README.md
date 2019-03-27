@@ -1,10 +1,8 @@
 [![banner](https://raw.githubusercontent.com/oceanprotocol/art/master/github/repo-banner%402x.png)](https://oceanprotocol.com)
 ------
 ## X-Ray Vision Web Application
-### I. The currently supported functions
 
-
-#### 1. Online app
+#### 1. Online app for  Medical Image Visualization
   * Go to http://18.185.53.230:8050
   * Visualization of Registered Medical Images
     * Check metadata of DICOM files
@@ -15,24 +13,25 @@
 
 <br>
 
-#### 2. Local Medical Image Visualization
-  * 1) Preparation
+#### 2. Local App Medical Image Visualization
+  * Run the app locally
 ```
-  # Open your terminal and clone the repository  
+  # 1) Open your terminal and clone the repository  
     git clone https://github.com/oceanprotocol/lungfish.git
-  # Copy your DICOM (.dcm) files to 'localpathto/lungfish/app/  data/local_image/'
-  # Run the app in your terminal
+  # 2) Copy your DICOM (.dcm) files to 'localpathto/lungfish/app/  data/local_image/'
+  # 3) Run the app in your terminal
     cd lungfish/app
     pip install -r requirements.txt
     python index.py
 ```
 
-  * 2) Visualization
-   * Go to http://127.0.0.1:8050/ in your browser
-   * Click the tab 'Local Image Processing'
-   * The metadata of all your local dcm files are automatically summarized in the table
-   * Click a row and visualize a DICOM file
-
+  * Visualization
+```  
+  # 4) Go to http://127.0.0.1:8050/ in your browser
+  # 5) Click the tab 'Local Image Processing'
+  # 5.1) The metadata of all your local dcm files are automatically summarized in the table
+  # 5.2) Click a row and visualize a DICOM file
+```
   <br>
 
 ### III. Built with
