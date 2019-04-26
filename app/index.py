@@ -11,6 +11,8 @@ import math
 
 from apps import image_assets,image_summary, image_upload
 from app import app, server,indicator
+# Add this for horuku 
+server = app.server
 app.layout = html.Div(
     [
         # header

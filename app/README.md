@@ -3,7 +3,7 @@
 ## X-Ray Vision App for Medical Image Visualization
 
 #### 1. An online app for medical image visualization
-  * App URL http://18.185.53.230:8050
+  * App URL https://x-ray-vision.herokuapp.com/
   * Tab 1: Visualization of Registered Medical Images
     * Check metadata of DICOM files
     * Visualization of DICOM files  
