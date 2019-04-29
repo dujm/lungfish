@@ -32,12 +32,8 @@ server = flask.Flask(__name__)
 app = dash.Dash(__name__, server=server)
 app.config.suppress_callback_exceptions = True
 colors = {'background': '#FFFFFF','text': '#111111','table':'#111111'}
-
+app.title = 'X-Ray Vision'
 #####################################################################
-
-
-
-
 # 3. Define function
 #returns top indicator div
 def indicator(color, text, id_value):

@@ -1,8 +1,9 @@
 [![banner](https://raw.githubusercontent.com/oceanprotocol/art/master/github/repo-banner%402x.png)](https://oceanprotocol.com)
 ------
+
 ## X-Ray Vision App for Medical Image Visualization
 
-#### 1. An online app for medical image visualization
+### 1.X-Ray Vision App
   * App URL https://x-ray-vision.herokuapp.com/
   * Tab 1: Visualization of Registered Medical Images
     * Check metadata of DICOM files
@@ -11,36 +12,78 @@
   * Tab 2: Summary Graphs of Registered Medical Images
   * Note: a pneumonia sample dataset is used in the demo (1000 DICOM files)
 
+![Screenshot](assets/X_Ray_Vision.png)
+
 <br>
 
-#### 2. A local app for medical image visualization
+---
+### 2. Built with
+  * [Dash](https://dash.plot.ly/) - Main server and interactive components
+  * [Plotly Python](https://plot.ly/python/) - Used to create the interactive plots
+
+<br>
+
+---
+### 3. Deployed with
+ * [Heroku](https://devcenter.heroku.com/articles/heroku-cli#download-and-install)
+
+```
+# 1) Install heroku  
+Mac: brew tap heroku/brew && brew install heroku
+Linux: sudo snap install --classic heroku
+
+# 2) Login in to Heroku
+heroku login
+
+# 3) Create an app on Heroku by assigning an app name 'x-ray-vision', the buildpack, and region
+cd lungfish/app
+heroku create x-ray-vision --buildpack heroku/python --region eu
+
+# 4) Check git remote
+git remote -v  
+
+# 5) Deploy the app to Heroku
+git add .
+git commit -m 'initial commit'
+git push heroku master
+
+# 6) Start the app
+heroku ps:scale web=1
+
+# 7) Visit the app website
+https://x-ray-vision.herokuapp.com/
+```
+
+<br>
+
+---
+### 4. Use the app locally for sensitive data
   * Run the app locally
+
 ```
-  # 1) Open your terminal and clone the repository  
-    git clone https://github.com/oceanprotocol/lungfish.git
-  # 2) Copy your DICOM (.dcm) files to 'localpathto/lungfish/app/data/local_image/'
-  # 3) Run the app in your terminal
-    cd lungfish/app
-    pip install -r requirements.txt
-    python index.py
+# 1) Open your terminal and clone the repository  
+git clone https://github.com/oceanprotocol/lungfish.git
+
+# 2) Copy your DICOM (.dcm) files to 'localpathto/lungfish/app/data/local_image/'
+
+# 3) Run the app in your terminal
+cd lungfish/app
+pip install -r requirements.txt
+python index.py
 ```
 
-  * Visualization
+  * Visualization of medical images
+
 ```  
-  # 4) Go to http://127.0.0.1:8050/ in your browser
-  # 5) Click the tab 'Local Image Processing'
-  # 5.1) The metadata of all your local dcm files are automatically summarized in the table
-  # 5.2) Click a row and visualize a DICOM file
+# 4) Go to http://127.0.0.1:8050/ in your browser
+
+# 5) Click the tab 'Local Image Processing'
+# 5.1) The metadata of all your local dcm files are automatically summarized in the table
+# 5.2) Click a row and visualize a DICOM file
 ```
-  <br>
-
-### 3. Built with
-  * Dash - Main server and interactive components
-  * Plotly Python - Used to create the interactive plots
-
-![Screenshot](https://raw.githubusercontent.com/oceanprotocol/lungfish/develop/app/X_Ray_Vision.png)
 
 <br>
 
-### 4. Reference  
+---
+### 5. Reference  
 [dash-salesforce-crm](https://github.com/plotly/dash-salesforce-crm)
