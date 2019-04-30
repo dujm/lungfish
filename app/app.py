@@ -1,5 +1,5 @@
 
-import os, glob, numpy as np, pandas as pd
+import os, numpy as np, pandas as pd
 
 from functools import partial
 from collections import defaultdict
@@ -9,33 +9,54 @@ from flask_cors import CORS
 # packages for visualization
 import pydicom
 from PIL import Image
+import plotly
 import plotly.graph_objs as go
 import plotly.plotly as py
 import plotly.tools as tls
-from plotly.offline import download_plotlyjs, init_notebook_mode,  iplot, plot
-import plotly
 
 # dash
-
 import flask
 import dash
-import dash_core_components as dcc
-from dash.dependencies import Input, Output,State
+
+
 import dash_table_experiments as dt
 import dash_html_components as html
-import dash_table
-# datatable filtering
-import json
 
-#####################################################################
+################################################################################
 server = flask.Flask(__name__)
 app = dash.Dash(__name__, server=server)
 app.config.suppress_callback_exceptions = True
 colors = {'background': '#FFFFFF','text': '#111111','table':'#111111'}
 app.title = 'X-Ray Vision'
-#####################################################################
-# 3. Define function
-#returns top indicator div
+################################################################################
+ # Functions used in the app
+################################################################################
+# Count by columns in dataframe
+def count_by_col(df, colname,new_colname):
+    df_count_by_colname = df.groupby([colname]).size().reset_index(name=new_colname)
+    df.rename(index=str, columns={"A": "Group", "B": "c"})
+    return df_count_by_colname
+
+# Count by 2 columns in dataframe
+def count_two_cols(df, col1, col2, new_colname):
+    df_count_by_colname = df.groupby([col1, col2]).size().reset_index(name=new_colname)
+    df_count_by_colname.rename(columns={col1:'Group'}, inplace=True)
+    return df_count_by_colname
+
+
+# Count by patient age ranges
+def count_by_PatientAge(df, col2,new_colname):
+    from itertools import cycle
+    # Age ranges
+    ranges = [0,20,40,60,100]
+    df_count= df.groupby([col2,pd.cut(df.PatientAge, ranges)]).size().reset_index(name=new_colname)
+    # Add column age_group based on ranges
+    age_group = cycle(['Age 0-20','Age 20-40','Age 40-60','Age 60-80'])
+    df_count['Group'] = [next(age_group) for age in range(len(df_count))]
+    df_count_age_col2 = df_count.drop(['PatientAge'], axis=1)
+    return df_count_age_col2
+
+# Return indicator div
 def indicator(color, text, id_value):
     return html.Div(
         [
@@ -52,7 +73,6 @@ def indicator(color, text, id_value):
         className="four columns indicator",
 
     )
-
 
 pl_bone=[[0.0, 'rgb(0, 0, 0)'],
          [0.05, 'rgb(10, 10, 14)'],
@@ -126,7 +146,7 @@ def read_dcm_meta(image_directory,save_csv_dir):
     filename= 'df_dcm_' + str(len(image_fps)) + 'dash_sample.csv'
     df_dcm.to_csv(os.path.join(save_csv_dir,filename),index=False)
     return df_dcm
-# return html Table with dataframe values
+
 
 def get_pl_image(dicom_filename, hist_equal=False, no_bins=None):
     #dicom_filename- a string 'filename.dcm'
@@ -142,7 +162,55 @@ def get_pl_image(dicom_filename, hist_equal=False, no_bins=None):
     else:
         return np.flipud(img)
 
-def DICOM_heatmap(z, title, width=600, height=600, colorscale=pl_bone):
+
+# Show DICOM image heatmap WITH bounding box annotaion 
+def DICOM_heatmap(z, title, x0, x1,y0,y1, width=600, height=600, colorscale=pl_bone ):
+
+    trace0=dict(type='heatmap',
+           z=z,
+           colorscale=colorscale,
+           zsmooth='best',
+           colorbar=dict(thickness=20, ticklen=4),
+              )
+
+    trace1 = go.Scatter(
+        x=[x1,x1],
+        y=[y0, y1],
+        mode='lines',
+        line = dict(color = ('rgb(252,141,89)'),width = 2),
+        showlegend=False)
+    trace2 = go.Scatter(
+        x=[x0,x0],
+        y=[y0, y1],
+        mode='lines',
+        line = dict(color = ('rgb(252,141,89)'),width = 2),
+        showlegend=False)
+    trace3 = go.Scatter(
+        x=[x0,x1],
+        y=[y0, y0],
+        mode='lines',
+        line = dict(color = ('rgb(252,141,89)'),width = 2),
+        showlegend=False)
+    trace4 = go.Scatter(
+        x=[x0,x1],
+        y=[y1, y1],
+        mode='lines',
+        line = dict(color = ('rgb(252,141,89)'),width = 2),
+        showlegend=False)
+
+    data = [trace0, trace1, trace2,trace3, trace4]
+    axis=dict(zeroline=False, showgrid=True, ticklen=4)
+    layout=dict(width=600, height=600,
+                font=dict(family='Balto', size=12),
+                xaxis= dict(axis),
+                yaxis= dict(axis),
+                title= title,
+            )
+
+    return  dict(data=data, layout=layout,axis=axis) #
+
+# Show DICOM image heatmap without bounding box annotaion
+def DICOM_heatmap2(z, title, width=600, height=600, colorscale=pl_bone):
 
     data=[dict(type='heatmap',
            z=z,
@@ -160,15 +228,12 @@ def DICOM_heatmap(z, title, width=600, height=600, colorscale=pl_bone):
             title= title
             )
 
-    return  dict(data=data, layout=layout,axis=axis) # added axis =axis
-
-
+    return  dict(data=data, layout=layout,axis=axis) #
 
 def df_to_table(df):
     return html.Table(
         # Header
         [html.Tr([html.Th(col) for col in df.columns])] +
-
         # Body
         [
             html.Tr(
@@ -180,19 +245,3 @@ def df_to_table(df):
             for i in range(len(df))
         ]
     )
-
-def fig_to_uri(in_fig, close_all=True, **save_args):
-    # type: (plt.Figure) -> str
-    '''
-    Save a figure as a URI
-    :param in_fig:
-    :return:
-    '''
-    out_img = BytesIO()
-    in_fig.savefig(out_img, format='png', **save_args)
-    if close_all:
-        in_fig.clf()
-        plt.close('all')
-    out_img.seek(0)  # rewind file
-    encoded = base64.b64encode(out_img.read()).decode('ascii').replace('\n', '')
-    return 'data:image/png;base64,{}'.format(encoded)
