@@ -3,16 +3,21 @@
 
 ## X-Ray Vision App for Medical Image Visualization
 
-### 1.X-Ray Vision App
-  * App URL https://x-ray-vision.herokuapp.com/
+* App URL https://x-ray-vision.herokuapp.com
+
+### 1. Functions
   * Tab 1: Visualization of Registered Medical Images
-    * Check metadata of DICOM files
     * Visualization of DICOM files  
+    * Lung opacity annotation (regions in orange bounding boxes)
+    * Check metadata of DICOM files
 
   * Tab 2: Summary Graphs of Registered Medical Images
-  * Note: a pneumonia sample dataset is used in the demo (1000 DICOM files)
 
-![Screenshot](assets/X_Ray_Vision.png)
+  * Tab 3: On-premise use of the app
+    * Visualization of DICOM files
+    * Extract metadata of DICOM files
+
+![Screenshot](assets/X-Ray_Vision.png)
 
 <br>
 
@@ -20,6 +25,7 @@
 ### 2. Built with
   * [Dash](https://dash.plot.ly/) - Main server and interactive components
   * [Plotly Python](https://plot.ly/python/) - Used to create the interactive plots
+  * Dataset: a pneumonia sample dataset from NIH Clinical Center (1000 DICOM files)
 
 <br>
 
@@ -29,8 +35,11 @@
 
 ```
 # 1) Install heroku  
-Mac: brew tap heroku/brew && brew install heroku
-Linux: sudo snap install --classic heroku
+# Mac:
+brew tap heroku/brew && brew install heroku
+
+# Linux:
+sudo snap install --classic heroku
 
 # 2) Login in to Heroku
 heroku login
@@ -57,7 +66,7 @@ https://x-ray-vision.herokuapp.com/
 <br>
 
 ---
-### 4. Use the app locally for sensitive data
+### 4. On-premise use of the app
   * Run the app locally
 
 ```
@@ -75,7 +84,7 @@ python index.py
   * Visualization of medical images
 
 ```  
-# 4) Go to http://127.0.0.1:8050/ in your browser
+# 4) Visit http://127.0.0.1:8050/ in your browser
 
 # 5) Click the tab 'Local Image Processing'
 # 5.1) The metadata of all your local dcm files are automatically summarized in the table
