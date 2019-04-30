@@ -6,16 +6,16 @@
 * App URL https://x-ray-vision.herokuapp.com
 
 ### 1. Functions
-  * Tab 1: Visualization of Registered Medical Images
-    * Visualization of DICOM files  
+  * Tab 1: Visualization of registered medical images
+    * Visualization of DICOM images
     * Lung opacity annotation (regions in orange bounding boxes)
-    * Check metadata of DICOM files
+    * Summary of image metadata
 
-  * Tab 2: Summary Graphs of Registered Medical Images
+  * Tab 2: Summary graphs of registered medical images
 
   * Tab 3: On-premise use of the app
-    * Visualization of DICOM files
-    * Extract metadata of DICOM files
+    * Visualization of DICOM images
+    * Metadata extraction of DICOM images
 
 ![Screenshot](assets/X-Ray_Vision.png)
 
@@ -25,8 +25,7 @@
 ### 2. Built with
   * [Dash](https://dash.plot.ly/) - Main server and interactive components
   * [Plotly Python](https://plot.ly/python/) - Used to create the interactive plots
-  * Dataset: a pneumonia sample dataset from NIH Clinical Center (1000 DICOM files)
-
+  * Dataset: a pneumonia sample dataset from NIH Clinical Center (1000 DICOM images)
 <br>
 
 ---
