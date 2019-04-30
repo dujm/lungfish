@@ -1,93 +1,59 @@
-import os, glob, numpy as np, pandas as pd
+################################################################################
+# Import packages
+################################################################################
+import os, json, urllib, pandas as pd
 
-from functools import partial
-from collections import defaultdict
-# flask
-from flask import Flask
-from flask_cors import CORS
 # packages for visualization
-import pydicom
-
-from PIL import Image
+import plotly
 import plotly.graph_objs as go
 import plotly.plotly as py
 import plotly.tools as tls
-from plotly.offline import download_plotlyjs, init_notebook_mode,  iplot, plot
-import plotly
 
 # dash
-
-import flask
 import dash
 import dash_core_components as dcc
 from dash.dependencies import Input, Output,State
 import dash_table_experiments as dt
 import dash_html_components as html
 import dash_table
-# datatable filtering
-import json
+import chardet
 
-
-#import directories from app.py
 # import functions from app.py
-from app import app, server, pl_bone, colors,indicator,  df_to_table, histogram_equalization, get_pl_image, DICOM_heatmap
+from app import app, server, pl_bone, colors,indicator, get_pl_image, DICOM_heatmap
 
-
-
-#####################################################################
-# A function to read dcm meta data into a dataframe
-def read_dcm_meta(image_directory,save_csv_dir):
-    image_fps = []
-    for (dirpath, dirnames, filenames) in os.walk(image_directory):
-        #print(filenames)
-        image_fps += [os.path.join(dirpath, file) for file in filenames if file.endswith('.dcm')]
-    print(len(image_fps),'.dcm files were found in',image_directory)
-
-    dcms = [pydicom.read_file(x, stop_before_pixels=True) for x in image_fps]
-
-    meta, tag_to_key = zip(*[parse_dcm_metadata(x) for x in dcms])
-
-    df_dcm = pd.DataFrame.from_records(data=meta)
-    print(df_dcm.head(1))
-    filename= 'df_dcm_' + str(len(image_fps)) + 'dash_sample.csv'
-    df_dcm.to_csv(os.path.join(save_csv_dir,filename),index=False)
-    return df_dcm
-
-#####################################################################
-# 2. directories
+################################################################################
+# Directories
+################################################################################
 # Sample image data
 sample_image=('./data/sample_image/')
 
 # Sample meta data
 sample_meta=('./data/sample_meta/')
-#####################################################################
-# 1.1 Read csv data
+
+################################################################################
+# Data
+################################################################################
 df1 =pd.read_csv('./data/sample_meta/df_dcm_merge_box_bbcounts_app1000samples_cleaned.csv')
 df1['Number'] = range(1, len(df1) + 1)
 
-#####################################################################
+dataframes = {'Sample dataset': df1}
 
-
-
+################################################################################
+# App Layout
+################################################################################
 layout = [
-    # top controls
+    # 1. Dropdown
     html.Div(
         [
-        html.H2("Visualization of Registered Medical Images"),
+        html.H3("Visualization of Registered Medical Images"),
         dcc.Dropdown(
-            id='app-1-dropdown',
-            options=[
-                {'label': 'Select Dataset - {}'.format(i), 'value': i} for i in [
-                    'Sample Dataset'
-                    ]
-                ]
-            ),
-        ],
+            id='app1dropdown',
+            options=[{'label': df, 'value': df} for df in dataframes],
+                value ='Sample dataset')],
         className="row",
-        style={'marginBottom': 5, 'marginTop': 50,'fontsize':20},
-    ),
+        style={'marginBottom': 5, 'marginTop': 50,'fontsize':20}),
 
-    # indicators div
+    # 2. Indicators
     html.Div(
         [
             indicator(
@@ -109,8 +75,8 @@ layout = [
         className="row",
     ),
 
-
-        # 2. 2nd row: table
+################################################################################
+        # 3. Table
     html.Div(
         style={'backgroundColor': colors['background'],'color': colors['text']},
         children =
@@ -125,7 +91,7 @@ layout = [
             row_selectable=True,
             filterable=True,
             sortable=True,
-            selected_row_indices=[],
+            selected_row_indices=[0],
             max_rows_in_viewport=10,
             resizable =True,
             enable_drag_and_drop=True,
@@ -135,17 +101,25 @@ layout = [
             row_update= True,
             editable =True
             ),
-            html.H2(''),
+            html.H2(),
+            html.A(
+                'Download Data',
+                id='download-link',
+                download="DICOM_1000_image_assets.csv",
+                href="",
+                target="_blank"
+            ),
+            html.Hr(),
             html.H2('Image Visualization of DICOM Files'),
             html.Div(id='selected-indexes',style={'margin-top': 50,'marginBottom': 10}),
             dcc.Graph(id='dt_graph')
         ]
         ),
-
 ]
 
-
-#####################################################################
+################################################################################
+# Callbacks
+################################################################################
 # 1. Update dt.DataTable rows in a callback
 @app.callback(
     Output('dt_interactive', 'selected_row_indices'),
@@ -160,9 +134,21 @@ def update_selected_row_indices(clickData, selected_row_indices):
                 selected_row_indices.append(point['pointNumber'])
                 print('selected_row_indices',selected_row_indices)
     return selected_row_indices
-
-#####################################################################
-# 1.2 update dt.graph
+################################################################################
+# 2. Download table link
+@app.callback(
+    dash.dependencies.Output('download-link', 'href'),
+    [dash.dependencies.Input('dt_interactive', 'rows')])
+def update_download_link(rows):
+    dff = pd.DataFrame(rows)
+    txt_string = dff.to_csv(index=False,
+        header = True,
+        encoding='ascii'
+        )
+    txt_string = "data:text/csv;ascii," + urllib.parse.quote(txt_string)
+    return txt_string
+################################################################################
+# 3. Update dcm visulization graph
 @app.callback(
     Output('dt_graph', 'figure'),
     [Input('dt_interactive', 'rows'),
@@ -182,12 +168,19 @@ def update_figure(rows, selected_row_indices):
     #print('the neweste image_dcm is',newest_image_dcm)
     newset_image_name=''.join(map(str, newest_image_dcm))
     #print('newset_image_name', newset_image_name)
-    pl_img=get_pl_image(os.path.join(sample_image,newset_image_name), hist_equal=True, no_bins=36)
 
-    fig=DICOM_heatmap(pl_img, str(newset_image_name))
-    #fig3 =py.iplot(fig2, filename='DICOM-MRBRAIN') don't do image show in dash
-    # add patches
+    # 2) Aad rectangle on the plot to show opacity regions
+    if newst_row['x'] is not None:
+        x0, y0 = newst_row['x'], newst_row['y']
+        width, height = newst_row['width'], newst_row['height']
+        x1 =x0 + width
+        y1 = y0 + height
+    else:
+        x0, x1, y0, y1 =0, 0, 0, 0
+   # 3) Plot heatmap
+    pl_img=get_pl_image(os.path.join(sample_image,newset_image_name), hist_equal=True, no_bins=36)
+    fig=DICOM_heatmap(pl_img, str(newset_image_name),x0, x1,y0,y1, width=600, height=600, colorscale=pl_bone )
 
     return fig
-
-#####################################################################
+################################################################################
+################################################################################

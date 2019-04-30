@@ -1,107 +1,66 @@
-import os, glob, numpy as np, pandas as pd
+################################################################################
+# Import packages
+################################################################################
+import os,  pandas as pd
 
-from functools import partial
-from collections import defaultdict
-# flask
-from flask import Flask
-from flask_cors import CORS
 # packages for visualization
-import pydicom
-
-from PIL import Image
 import plotly.graph_objs as go
 import plotly.plotly as py
 import plotly.tools as tls
-
 import plotly
 
 # dash
-
-import flask
 import dash
 import dash_core_components as dcc
 from dash.dependencies import Input, Output,State
 import dash_table_experiments as dt
 import dash_html_components as html
-import dash_table
-# datatable filtering
-import json
 
 
-#import directories from app.py
 # import functions from app.py
-from app import app, server, pl_bone, colors,indicator,  df_to_table, histogram_equalization, get_pl_image, DICOM_heatmap
+from app import app, server, colors, parse_dcm_metadata, read_dcm_meta,  get_pl_image, DICOM_heatmap, DICOM_heatmap2
+
+#pl_bone, colors,df_to_table, histogram_equalization,
+
+################################################################################
+# Functions
+################################################################################
 
 
-def parse_dcm_metadata(dcm):
-    '''author kaggle/jtlowery'''
-    unpacked_data = {}
-    group_elem_to_keywords = {}
-    # iterating here to force conversion from lazy RawDataElement to DataElement
-    for d in dcm:
-        pass
-    # keys are pydicom.tag.BaseTag, values are pydicom.dataelem.DataElement
-    for tag, elem in dcm.items():
-        tag_group = tag.group
-        tag_elem = tag.elem
-        keyword = elem.keyword
-        group_elem_to_keywords[(tag_group, tag_elem)] = keyword
-        value = elem.value
-        unpacked_data[keyword] = value
-    return unpacked_data, group_elem_to_keywords
-
-#####################################################################
-# A function to read dcm meta data into a dataframe
-def read_dcm_meta(image_directory,save_csv_dir):
-    image_fps = []
-    for (dirpath, dirnames, filenames) in os.walk(image_directory):
-        #print(filenames)
-        image_fps += [os.path.join(dirpath, file) for file in filenames if file.endswith('.dcm')]
-    print(len(image_fps),'.dcm files were found in',image_directory)
-
-    dcms = [pydicom.read_file(x, stop_before_pixels=True) for x in image_fps]
-
-    meta, tag_to_key = zip(*[parse_dcm_metadata(x) for x in dcms])
-
-    df_dcm = pd.DataFrame.from_records(data=meta)
-    df_dcm['image_dcm']=df_dcm['PatientID'].astype(str) + '.dcm'
-    print(df_dcm.head(1))
-    filename= 'df_dcm_dash_local.csv'
-    df_dcm.to_csv(os.path.join(save_csv_dir,filename),index=False)
-    return df_dcm
-
-#####################################################################
-# 2. directories
-# local image data
+################################################################################
+# Directories
+################################################################################
+# Copy your images here
 local_image=('./data/local_image/')
 
-# local meta data
+# Copy your meta data here
 local_meta=('./data/local_meta/')
-#####################################################################
-# 1.1 Read csv data
+
+################################################################################
+# Data
+################################################################################
+# 1.1 Read DICOM images and summarize meta data into a csv file
 read_df =read_dcm_meta(local_image,local_meta)
+
+# Read the meta data csv file
 df =pd.read_csv(os.path.join(local_meta,'df_dcm_dash_local.csv'))
 print('local',df.head(2))
-#####################################################################
 
+dataframes = {'Local medical images': df}
+################################################################################
+# App Layout
+################################################################################
 layout = [
     # top controls
     html.Div(
         [
-        html.H2("Local Medical Images"),
+        html.H3("Local Medical Images"),
         dcc.Dropdown(
-            id='app-3-dropdown',
-            options=[
-                {'label': 'Select Dataset - {}'.format(i), 'value': i} for i in [
-                    'local Dataset'
-                    ]
-                ]
-            ),
-        ],
-        className="row",
-        style={'marginBottom': 5, 'marginTop': 50,'fontsize':20},
-    ),
-
+            id='app3dropdown',
+            options=[{'label': df, 'value': df} for df in dataframes],
+            value ='Local medical images')],
+            className="row",
+            style={'marginBottom': 5, 'marginTop': 50,'fontsize':20}),
 
         # 2. 2nd row: table
     html.Div(
@@ -118,7 +77,7 @@ layout = [
             row_selectable=True,
             filterable=True,
             sortable=True,
-            selected_row_indices=[],
+            selected_row_indices=[0],
             max_rows_in_viewport=10,
             resizable =True,
             enable_drag_and_drop=True,
@@ -138,7 +97,9 @@ layout = [
 ]
 
 
-#####################################################################
+################################################################################
+# Callbacks
+################################################################################
 # 1. Update dt.DataTable rows in a callback
 @app.callback(
     Output('dt_interactive_local', 'selected_row_indices'),
@@ -154,7 +115,7 @@ def update_selected_row_indices(clickData, selected_row_indices):
                 print('selected_row_indices',selected_row_indices)
     return selected_row_indices
 
-#####################################################################
+################################################################################
 # 1.2 update dt.graph
 @app.callback(
     Output('dt_graph_local', 'figure'),
@@ -177,10 +138,11 @@ def update_figure(rows, selected_row_indices):
     #print('newset_image_name', newset_image_name)
     pl_img=get_pl_image(os.path.join(local_image,newset_image_name), hist_equal=True, no_bins=36)
 
-    fig=DICOM_heatmap(pl_img, str(newset_image_name))
+    fig=DICOM_heatmap2(pl_img, str(newset_image_name))
     #fig3 =py.iplot(fig2, filename='DICOM-MRBRAIN') don't do image show in dash
     # add patches
 
     return fig
 
-#####################################################################
+################################################################################
+################################################################################
