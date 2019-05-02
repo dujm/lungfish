@@ -25,8 +25,8 @@
 ## Features
 The major modules in X-Ray Vision are
 
-  * Medical Image Visualization App (Alpha Version)
-    * https://x-ray-vision.herokuapp.com/
+  * Medical Image Visualization App
+    * https://x-ray-vision.herokuapp.com
 
   * Lung Opacity Detection using Deep Learning
     * Check [Jupyter Notebooks](https://github.com/oceanprotocol/lungfish/tree/develop/ocean_assets/notebook)
