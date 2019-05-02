@@ -56,12 +56,14 @@ python index.py
 ```
 
 <br>
----
-### 3. Built with
-  * Dataset: a pneumonia sample dataset from NIH Clinical Center (1000 DICOM images)
-  * [Dash](https://dash.plot.ly/) - Main server and interactive components
-  * [Plotly Python](https://plot.ly/python/) - Used to create the interactive plots  
-  * Deployed with [Heroku](https://devcenter.heroku.com/articles/heroku-cli#download-and-install)
+
+---  
+
+### 3. Built with  
+  * Dataset: a pneumonia sample dataset from NIH Clinical Center (1000 DICOM images)  
+  * [Dash](https://dash.plot.ly/) - Main server and interactive components  
+  * [Plotly Python](https://plot.ly/python/) - Used to create the interactive plots    
+  * Deployed with [Heroku](https://devcenter.heroku.com/articles/heroku-cli#download-and-install)  
 
 ```
 # 1) Install heroku  
