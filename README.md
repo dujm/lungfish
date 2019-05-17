@@ -19,8 +19,8 @@
 - [License](#license)
 ------
 ## Blog
-  * [Blog Post in English](https://blog.oceanprotocol.com/)
-  * [Blog Post in simplified Chinese](https://medium.com/ocean-protocol-international/x-ray-vision-%E6%99%BA%E6%85%A7%E5%8C%BB%E7%96%97%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B-bb75ad5b873a)
+  * [Blog Post in English](https://blog.oceanprotocol.com/x-ray-vision-a-healthcare-use-case-d18ea64bdd2b)
+  * [Blog Post in simplified Chinese](https://medium.com/ocean-protocol-international/x-ray-vision-%E6%99%BA%E6%85%A7%E5%8C%BB%E7%96%97%E7%9A%84%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B-2007918df2cc)
 
 ## Features
 The major modules in X-Ray Vision are
@@ -45,7 +45,6 @@ The major modules in X-Ray Vision are
     ├── reports: More data Visualization
     ├── src: Source files
     │   ├── Mask_RCNN: Mask_RCNN library
-    │   ├── __init__.py
     │   ├── config: functions
     └── └── data: raw data and processed data (image data is not uploaded to GitHub)
 
