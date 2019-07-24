@@ -1,7 +1,6 @@
 ################################################################################
 # Import packages
 ################################################################################
-<<<<<<< HEAD
 import os, glob, urllib, pandas as pd
 
 # packages for visualization
@@ -9,18 +8,15 @@ import plotly.graph_objs as go
 import plotly.plotly as py
 import plotly.tools as tls
 import plotly
-=======
-import os, pandas as pd
->>>>>>> a6178f65863b38ebaaa1b989bd6eb767ecf162e3
 
 # dash
+import dash
 import dash_core_components as dcc
 from dash.dependencies import Input, Output, State
 import dash_table_experiments as dt
 import dash_html_components as html
 import dash_table
 
-<<<<<<< HEAD
 import base64
 from urllib.parse import quote as urlquote
 from flask import Flask, send_from_directory
@@ -61,33 +57,21 @@ def parse_contents(contents, filename, date):
         ]
     )
 
-=======
-# import functions from app.py
-from app import app, server, colors, read_dcm_meta, get_pl_image, DICOM_heatmap2
->>>>>>> a6178f65863b38ebaaa1b989bd6eb767ecf162e3
 
 ################################################################################
 # Directories
 
 ################################################################################
 # Copy your images here
-<<<<<<< HEAD
 local_image = './data/local_image/'
 
 # The DICOM meta information will be saved here
 local_meta = './data/local_meta/'
 
-=======
-local_image = "./data/local_image/"
-
-# Copy your meta data here
-local_meta = "./data/local_meta/"
->>>>>>> a6178f65863b38ebaaa1b989bd6eb767ecf162e3
 
 ################################################################################
 # Make sure no user's data is saved on the server
 ################################################################################
-<<<<<<< HEAD
 
 
 dir_name = "./project/app_uploaded_files"
@@ -122,16 +106,6 @@ write_dcm_meta = read_dcm_meta(local_image, local_meta)
 # Read the meta data csv file
 df = pd.read_csv(os.path.join(local_meta, 'df_dcm_metadata_extraction.csv'))
 ################################################################################
-=======
-# 1.1 Read DICOM images and summarize meta data into a csv file
-read_df = read_dcm_meta(local_image, local_meta)
-
-# Read the meta data csv file
-df = pd.read_csv(os.path.join(local_meta, "df_dcm_dash_local.csv"))
-print("local", df.head(2))
-
-dataframes = {"Local medical images": df}
->>>>>>> a6178f65863b38ebaaa1b989bd6eb767ecf162e3
 ################################################################################
 # App Layout
 ################################################################################
@@ -140,7 +114,6 @@ layout = [
     html.H3("Local Medical Image Processing"),
     html.Div(
         [
-<<<<<<< HEAD
             ################################################################################
             # Radio items
             dcc.RadioItems(
@@ -161,50 +134,6 @@ layout = [
     html.Hr(),
     html.Div(id='display-selected-values'),
     html.Hr(),
-=======
-            html.H3("Local Medical Images"),
-            dcc.Dropdown(
-                id="app3dropdown",
-                options=[{"label": df, "value": df} for df in dataframes],
-                value="Local medical images",
-            ),
-        ],
-        className="row",
-        style={"marginBottom": 5, "marginTop": 50, "fontsize": 20},
-    ),
-    # 2. 2nd row: table
-    html.Div(
-        style={"backgroundColor": colors["background"], "color": colors["text"]},
-        children=[
-            html.H3("Metadata of DICOM Files"),
-            # use datatable experiments dt
-            dt.DataTable(
-                id="dt_interactive_local",
-                # rows
-                rows=df.to_dict("records"),  # initialize the rows
-                columns=df.columns,
-                row_selectable=True,
-                filterable=True,
-                sortable=True,
-                selected_row_indices=[0],
-                max_rows_in_viewport=10,
-                resizable=True,
-                enable_drag_and_drop=True,
-                header_row_height=50,
-                column_widths=200,
-                row_scroll_timeout=1,
-                row_update=True,
-                editable=True,
-            ),
-            html.H2(""),
-            html.H2("Image Visualization of DICOM Files"),
-            html.Div(
-                id="selected-indexes", style={"margin-top": 50, "marginBottom": 10}
-            ),
-            dcc.Graph(id="dt_graph_local"),
-        ],
-    ),
->>>>>>> a6178f65863b38ebaaa1b989bd6eb767ecf162e3
 ]
 
 
@@ -400,53 +329,34 @@ def update_download_link2(df_upload):
 # Callback 3. Update dt.DataTable rows
 ################################################################################
 @app.callback(
-<<<<<<< HEAD
     Output('dt_interactive_local', 'selected_row_indices'),
     [Input('dt_graph_local', 'clickData')],
     [State('dt_interactive_local', 'selected_row_indices')],
-=======
-    Output("dt_interactive_local", "selected_row_indices"),
-    [Input("dt_graph_local", "clickData")],
-    [State("dt_interactive_local", "selected_row_indices")],
->>>>>>> a6178f65863b38ebaaa1b989bd6eb767ecf162e3
 )
 def update_selected_row_indices(clickData, selected_row_indices):
     if clickData:
-        for point in clickData["points"]:
-            if point["pointNumber"] in selected_row_indices:
-                selected_row_indices.remove(point["pointNumber"])
+        for point in clickData['points']:
+            if point['pointNumber'] in selected_row_indices:
+                selected_row_indices.remove(point['pointNumber'])
             else:
-<<<<<<< HEAD
                 selected_row_indices.append(point['pointNumber'])
                 # print('selected_row_indices', selected_row_indices)
-=======
-                selected_row_indices.append(point["pointNumber"])
-                print("selected_row_indices", selected_row_indices)
->>>>>>> a6178f65863b38ebaaa1b989bd6eb767ecf162e3
     return selected_row_indices
 
 
 ################################################################################
 # 3.2 update dt.graph
 @app.callback(
-<<<<<<< HEAD
     Output('dt_graph_local', 'figure'),
     [
         Input('dt_interactive_local', 'rows'),
         Input('dt_interactive_local', 'selected_row_indices'),
-=======
-    Output("dt_graph_local", "figure"),
-    [
-        Input("dt_interactive_local", "rows"),
-        Input("dt_interactive_local", "selected_row_indices"),
->>>>>>> a6178f65863b38ebaaa1b989bd6eb767ecf162e3
     ],
 )
 def update_figure(rows, selected_row_indices):
     # df = pd.DataFrame(rows)
     selected_rows = [rows[i] for i in selected_row_indices]
     # selected_rows=selected_row_indices[-1]
-<<<<<<< HEAD
     # print(selected_rows)
     # print(len(selected_rows))
     newst_row = selected_rows[0]
@@ -457,18 +367,6 @@ def update_figure(rows, selected_row_indices):
     newest_image_id = newst_row['PatientID']
     # print('the neweste image_dcm is',newest_image_dcm)
     newset_image_name = ''.join(map(str, newest_image_id)) + '.dcm'
-=======
-    print(selected_rows)
-    print(len(selected_rows))
-    newst_row = selected_rows[0]
-    print("the new one is", selected_rows[0])
-    # limit to one image
-    # 1) Select image name
-    # image_dcm = [y['image_dcm'] for y in selected_rows]
-    newest_image_dcm = newst_row["image_dcm"]
-    # print('the neweste image_dcm is',newest_image_dcm)
-    newset_image_name = "".join(map(str, newest_image_dcm))
->>>>>>> a6178f65863b38ebaaa1b989bd6eb767ecf162e3
     # print('newset_image_name', newset_image_name)
     pl_img = get_pl_image(
         os.path.join(local_image, newset_image_name), hist_equal=True, no_bins=36
